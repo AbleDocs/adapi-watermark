@@ -13,6 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  tag: '$(Build.BuildId)'
 
 steps:
 - task: UseDotNet@2
@@ -35,3 +36,19 @@ steps:
     command: 'test'
     projects: 'watermark-utility-tests\WatermarkUtilityTests.csproj'
     arguments: '--configuration $(buildConfiguration) --collect "Code coverage"'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Package Watermark Utility'
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: 'watermark-utility\WatermarkUtility.csproj'
+    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/Output'
+    zipAfterPublish: true
+    modifyOutputPath: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Watermark Utility to Pipelines'
+  inputs:
+    pathtoPublish: '$(Build.ArtifactStagingDirectory)/Output'
+    artifactName: 'watermark-utility-$(tag)'
