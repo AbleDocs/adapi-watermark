@@ -43,7 +43,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'watermark-utility\WatermarkUtility.csproj'
-    arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)/Output'
+    arguments: '--configuration $(BuildConfiguration) --self-contained true --runtime win10-x64 --output $(Build.ArtifactStagingDirectory)/Output'
     zipAfterPublish: true
     modifyOutputPath: true
 
