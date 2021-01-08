@@ -2,6 +2,7 @@
 using iText.IO.Font.Constants;
 using iText.Kernel.Colors;
 using iText.Kernel.Font;
+using iText.Kernel.Geom;
 using iText.Kernel.Pdf;
 using iText.Layout;
 using iText.Layout.Element;
@@ -114,7 +115,7 @@ namespace watermark_utility
         }
 
         /// <summary>
-        /// Adds the provided text to the specified page in the PdfDocument
+        /// Adds the provided text to the specified page in the PdfDocument in the center of the page
         /// </summary>
         /// <param name="document"></param>
         /// <param name="pageNumber"></param>
@@ -122,8 +123,17 @@ namespace watermark_utility
         protected static void addWatermarkToPage(PdfDocument document, int pageNumber, Paragraph text)
         {
             PdfPage page = document.GetPage(pageNumber);
+            Rectangle pageSize = page.GetPageSizeWithRotation();
             Canvas pageCanvas = new Canvas(page, page.GetPageSize()).
-                ShowTextAligned(text, 100, 100, pageNumber, TextAlignment.CENTER, VerticalAlignment.TOP, 45);
+                ShowTextAligned(
+                    text,
+                    (pageSize.GetRight() - pageSize.GetLeft()) / 2, // Center the watermark on the horizontal axis of the page
+                    (pageSize.GetTop() - pageSize.GetBottom()) / 2, // Center the watermark on the vertical axis of the page
+                    pageNumber,
+                    TextAlignment.CENTER,
+                    VerticalAlignment.TOP,
+                    0
+                );
             pageCanvas.Close();
         }
     }
