@@ -104,7 +104,7 @@ namespace watermark_utility
             Paragraph watermarkText = new Paragraph(watermarkTextContent);
             watermarkText.SetFont(PdfFontFactory.CreateFont(FontProgramFactory.CreateFont(StandardFonts.HELVETICA)));
             watermarkText.SetFontSize(15);
-            watermarkText.SetFontColor(ColorConstants.BLACK);
+            watermarkText.SetFontColor(new DeviceRgb(11, 129, 196));
 
             if (pages == "all")
                 for (int i = 1; i < document.GetNumberOfPages() + 1; i++)
