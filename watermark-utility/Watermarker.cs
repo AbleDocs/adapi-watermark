@@ -187,7 +187,7 @@ namespace watermark_utility
                 watermarkImage.GetHeight(), // use the whole height of the image
                 ((pageSize.GetRight() - pageSize.GetLeft()) / 2) - (watermarkImage.GetWidth() / 2), // Center the watermark on the horizontal axis of the page
                 (pageSize.GetTop() - pageSize.GetBottom()) / 2, // Center the watermark on the vertical axis of the page
-                true
+                false
             );
 
             // Restore the initial graphics state
