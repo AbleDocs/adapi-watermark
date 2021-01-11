@@ -113,7 +113,11 @@ namespace watermark_utility
                     writerProperties.SetStandardEncryption(
                         null, // no user password
                         Encoding.UTF8.GetBytes(outputPassword), // set owner password
-                        EncryptionConstants.ALLOW_PRINTING,
+                        EncryptionConstants.ALLOW_PRINTING | EncryptionConstants.ALLOW_SCREENREADERS,
+--
+
+
+,
                         EncryptionConstants.ENCRYPTION_AES_128 | EncryptionConstants.DO_NOT_ENCRYPT_METADATA
                     );
                     writer = new PdfWriter(output, writerProperties);
