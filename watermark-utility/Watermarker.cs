@@ -114,8 +114,9 @@ namespace watermark_utility
         {
             Paragraph watermarkText = new Paragraph(watermarkTextContent);
             watermarkText.SetFont(PdfFontFactory.CreateFont(FontProgramFactory.CreateFont(StandardFonts.HELVETICA)));
-            watermarkText.SetFontSize(15);
-            watermarkText.SetFontColor(new DeviceRgb(11, 129, 196));
+            watermarkText.SetFontSize(20);
+            watermarkText.SetFontColor(new DeviceRgb(10, 129, 195));
+            watermarkText.SetOpacity(0.5f);
 
             ResourceManager resourceManager = WatermarkResources.ResourceManager;
             byte[] imageData = (byte[])resourceManager.GetObject("AbleDocs_logo");
